@@ -10,13 +10,22 @@
 #include <limits.h>
 char* file_to_write;
 char* file_to_read;
+char* pipe_name;
 
-void consume(char* file_to_write, int fd[2]) {
-    if (close(fd[1]) == -1) {
-        perror("close error z produce");
-        exit(EXIT_FAILURE);
+void remove_pipe() {
+    if (remove(pipe_name) == 0) {
+        printf("Potok nazwany został usunięty.\n");
+    } else {
+        perror("remove pipe error");
     }
+
+}
+
+void consume(char* file_to_write, char* pipe_name) {
     int write_descriptor = open(file_to_write, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (write_descriptor == -1) perror("aaaa open error");
+    int fifo_descriptor = open(pipe_name,O_RDONLY,0644);
+    if (fifo_descriptor == -1) perror("open fifo error");
     size_t rand_bytes = rand() % 512 + 1;
     size_t bytes_read = 1;
     size_t bytes_wrote;
@@ -27,7 +36,7 @@ void consume(char* file_to_write, int fd[2]) {
         /*If all file descriptors referring to the write end of a pipe have
        been closed, then an attempt to read(2) from the pipe will see
        end-of-file (read(2) will return 0)*/
-        bytes_read = read(fd[0], buffer, rand_bytes);
+        bytes_read = read(fifo_descriptor, buffer, rand_bytes);
         if (bytes_read == 0) break;
         if (bytes_read == -1) {
             perror("read error z consume");
@@ -45,20 +54,14 @@ void consume(char* file_to_write, int fd[2]) {
         }
 
     }
-
-    if (close(fd[0]) == -1) {
-        perror("close error z produce");
-        exit(EXIT_FAILURE);
-    }
 }
 
-void produce(char* file_to_read, int fd[2]) {
-    if (close(fd[0]) == -1) {
-        perror("close errorz produce");
-        exit(EXIT_FAILURE);
-    }
+void produce(char* file_to_read, char* pipe_name) {
 
     int read_descriptor = open(file_to_read, O_RDONLY, 0644);
+    if (read_descriptor == -1) perror("open error");
+    int fifo_descriptor = open(pipe_name,O_WRONLY | O_CREAT | O_TRUNC,0644);
+    if (fifo_descriptor == -1) perror("open fifo error");
     size_t rand_bytes = rand() % 512 + 1;
     size_t bytes_read = 1;
     size_t bytes_wrote;
@@ -72,45 +75,41 @@ void produce(char* file_to_read, int fd[2]) {
             perror("read error z produce");
             exit(EXIT_FAILURE);
         }
-        bytes_wrote = write(fd[1], buffer, bytes_read);
+        bytes_wrote = write(fifo_descriptor, buffer, bytes_read);
         if (bytes_wrote == -1) {
             perror("write error z produce");
             exit(EXIT_FAILURE);
         }
     }
-
-    if (close(fd[1]) == -1) {
-        perror("close error z produce");
-        exit(EXIT_FAILURE);
-    }
 }
 
 void handle_params(int argc, char** argv) {
-    if (!(argc == 3)) {
+    if (!(argc == 4)) {
         perror("zla ilosc argumentow");
         exit(EXIT_FAILURE);
     }
     file_to_read = argv[1];
     file_to_write = argv[2];
+    pipe_name = argv[3];
 }
 
 int main(int argc, char** argv) {
-    int fds[2];
-    if (pipe(fds) == -1) {
-        perror("pipe error");
+    handle_params(argc, argv);
+    if(mkfifo(pipe_name,0644) == -1) {
+        perror("named pipe error\n");
         exit(EXIT_FAILURE);
     }
-    handle_params(argc, argv);
     switch (fork()) {
         case 0:
-            consume(file_to_write, fds);
+            consume(file_to_write, pipe_name);
             break;
         case -1:
             perror("fork error");
             exit(EXIT_FAILURE);
         default:
-            produce(file_to_read, fds);
+            produce(file_to_read, pipe_name);
             break;
     }
+    atexit(remove_pipe);
     return 0;
 }
