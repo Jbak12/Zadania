@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cstdlib": "c",
+        "locale": "c",
+        "stdlib.h": "c",
+        "params_handling.h": "c",
+        "param.h": "c",
+        "limits.h": "c",
+        "fcntl.h": "c"
+    }
+}

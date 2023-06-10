@@ -1,0 +1,34 @@
+------------------------
+-JAKUB BAKALARZ-PROCESY-
+------------------------
+
+ZAD a
+------------------------
+w zadaniu zostają wypisane odpowiednie identyfikatory głównego procesu
+
+ZAD b
+------------------------
+w zadaniu zostala wywolana trzy razy funkcja fork(), uzyto funkcji wait() 
+aby proces macierzysty czekal na zakonczenie procesów potomnych
+
+ZAD c
+------------------------
+za pomoca funkcji sleep() uzytej w przypadku gdy proces jest dizeckiem, osieracamy dany proces przypisujac mu pid procesu init 
+
+zad d
+------------------------
+
+uzyto funkcji sleep() gdy proces jest jakims przodkiem, dzeki temu procesy mamy wyswietlone wzgledem przodka
+,liczba lisci odpowiada liczbie procesow
+zad e
+----------------
+
+
+n wywolan funkcji fork() tworzy 2^n procesów, poniewaz kazdyu proces, tworzy nowy , mozna to zobraczowac sobie jako drzewo binarne o wysokosci n
+
+
+
+MAKEFILE
+------------------------
+aby skompilowac dany program nalezy w terminalu wpisac make litera_programu
+

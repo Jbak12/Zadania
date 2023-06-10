@@ -1,0 +1,27 @@
+przykladowy output programu:
+
+pid procesu: 25181, ppid procesu: 25180,  gpid procesu: 25178
+ pid procesu: 25180, ppid procesu: 25179, gpid procesu: 25178
+ pid procesu: 25183, ppid procesu: 25179, gpid procesu: 25178
+ pid procesu: 25185, ppid procesu: 25184, gpid procesu: 25178
+ pid procesu: 25179, ppid procesu: 25178, gpid procesu: 25178
+ pid procesu: 25184, ppid procesu: 25178, gpid procesu: 25178
+ pid procesu: 25186, ppid procesu: 25178, gpid procesu: 25178
+ pid procesu: 25178, ppid procesu: 11595, gpid procesu: 25178
+
+
+ przedstawienie tego jako drzewka wartosci pid:
+
+              25178
+                |
+      /---------|--------------\
+      |         |              |
+    25186    25179           25184
+                |              |
+                |              |
+                |              | 
+    25183------------25180   25185
+                        |
+                      25181
+
+                        
