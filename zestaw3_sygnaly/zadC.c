@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
             case 0:
                 if(execl("./zadA.x","./zadA.x" ,handling_mode_string ,signal_code_string, NULL) == -1) {
                     perror("execl error");
+                    exit(EXIT_FAILURE);
                 }
                 break;
             
@@ -36,9 +37,9 @@ int main(int argc, char** argv) {
     
     default:
         sleep(1);       
-        printf("jestem procesem ultra macierzystym o kurwa id %d i ojcu nr %d i dzieciaku nr%d i grupie nr %d \n", getpid(),getppid(),pid, getpgid(getpid()));
+        printf("jestem procesem id %d i ojcu nr %d i dzieciaku nr%d i grupie nr %d \n", getpid(),getppid(),pid, getpgid(getpid()));
         if(kill(-pid, looking_for_process_constant) == -1) {
-            perror("ornor nie znalazłem ziomeczka zadnego : (((())")
+            perror("ornor nie znalazłem ziomeczka zadnego : (((())");
             exit(EXIT_FAILURE);
         }
         kill(-pid,signal_code);

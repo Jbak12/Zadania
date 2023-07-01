@@ -5,7 +5,6 @@
 #include<stdlib.h>
 #include <sys/types.h>
 #include "params_handling.h"
-#include "itoa.h"
 extern int signal_code;
 int main(int argc, char** argv) {
     handle_params(argc, argv);
@@ -15,19 +14,19 @@ int main(int argc, char** argv) {
         perror("aaaa eror\n");
         break;
     case 0:        
-        printf("jest to dziecko");
         if(execl("./zadA.x","./zadA.x" ,handling_mode_string ,signal_code_string, NULL) == -1) {
             perror("execl error");
         }
     
     default:
         sleep(1);
+        //sprawdzanie czy proces istnieje
         if(kill(child_process_pid, 0) == -1) {
             perror("nie ma procesu : /");
             exit(1);
         }
         if(kill(child_process_pid,signal_code) == -1) {
-            perror("zabijanie dziecka sie nie powiodlo");
+            perror("wysyłanie sygnalu do procesu dzie sie nie powiodlo");
             exit(1);
         }
         break;

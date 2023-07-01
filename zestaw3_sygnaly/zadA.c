@@ -6,7 +6,7 @@
 #include "params_handling.h"
 extern const char * const sys_siglist[];
 void sig_callback(int sig) {
-    printf("siema przyjalem sygnal %s numer %d ,epicko :))))\n", sys_siglist[sig], sig);
+    printf("przyjalem sygnal %s numer %d ,super :))))\n", sys_siglist[sig], sig);
 }
 
 void handle_signals() {
