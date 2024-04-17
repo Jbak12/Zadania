@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
             exit(1);
         }
         if(kill(child_process_pid,signal_code) == -1) {
-            perror("wysyłanie sygnalu do procesu dzie sie nie powiodlo");
+            perror("wysyłanie sygnalu do procesu sie sie nie powiodlo");
             exit(1);
         }
         break;

@@ -19,7 +19,7 @@ void handle_params(int argc, char** argv) {
         _exit(1);
         return;
     }
-    if(atoi(argv[2])> NSIG || atoi(argv[2])< 0) {
+    if(atoi(argv[2])> 31 || atoi(argv[2])< 0) {
          perror("zly kod  sygnału\n" );       
         exit(1);
         return;
