@@ -1,3 +1,5 @@
+CC=gcc
+
 CFLAGS=-Wall
 
 SOURCES=$(wildcard *.c)

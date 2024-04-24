@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     case 0: 
         // signal(signal_code,SIG_IGN);
         setpgid(getpid(),0);
-        printf("jestem typem typu dzieciak o kurwa id %d i ojcu nr %d i grupie numer %d \n", getpid(),getppid(), getpgid(getpid()));
+        printf("jestem typem typu dziecko o id %d i rodzicu nr %d i grupie numer %d \n", getpid(),getppid(), getpgid(getpid()));
         // wait(NULL);
         pid_t pidd;
         for(int i = 0;i<3;i++) {
@@ -37,9 +37,9 @@ int main(int argc, char** argv) {
     
     default:
         sleep(1);       
-        printf("jestem procesem id %d i ojcu nr %d i dzieciaku nr%d i grupie nr %d \n", getpid(),getppid(),pid, getpgid(getpid()));
+        printf("jestem procesem id %d i rodzicu nr %d i dziecku nr%d i grupie nr %d \n", getpid(),getppid(),pid, getpgid(getpid()));
         if(kill(-pid, looking_for_process_constant) == -1) {
-            perror("ornor nie znalazłem ziomeczka zadnego : (((())");
+            perror("o nie nie znalazłem zadnego");
             exit(EXIT_FAILURE);
         }
         kill(-pid,signal_code);

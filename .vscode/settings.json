@@ -6,6 +6,8 @@
         "params_handling.h": "c",
         "param.h": "c",
         "limits.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "libc-header-start.h": "c",
+        "signal.h": "c"
     }
 }
