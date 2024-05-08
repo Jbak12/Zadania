@@ -38,13 +38,13 @@ int main(int argc, char** argv) {
     }
     switch (fork()) {
         case 0:
-            execl("./konsument.x", "konsument.x", file_to_write, pipe_name, NULL);
+            execl("./konsument.x", "/.konsument.x", file_to_write, pipe_name, NULL);
             break;
         case -1:
             perror("fork error");
             exit(EXIT_FAILURE);
         default:
-            execl("./producent.x", "producent.x", file_to_read, pipe_name, NULL);
+            execl("./producent.x", "/.producent.x", file_to_read, pipe_name, NULL);
             break;
     }
     atexit(remove_pipe);
