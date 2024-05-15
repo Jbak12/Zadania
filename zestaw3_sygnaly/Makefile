@@ -12,8 +12,8 @@ OBJS2 = $(NAME2).o
 OBJS3 = $(NAME3).o
 CFLAGS = -Wall -std=c99 -pedantic -O
 LFLAGS = -Wall -std=c99 -pedantic -O
-MODE_ARG = 2
-SIG_ARG = 2
+MODE_ARG ?= 2
+SIG_ARG ?= 3
 CO = gcc
 LD = $(CO)
 

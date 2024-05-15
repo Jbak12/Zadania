@@ -8,6 +8,7 @@
         "limits.h": "c",
         "fcntl.h": "c",
         "libc-header-start.h": "c",
-        "signal.h": "c"
+        "signal.h": "c",
+        "unistd.h": "c"
     }
 }

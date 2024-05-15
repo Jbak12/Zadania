@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     default:
         sleep(1);       
         printf("jestem procesem id %d i rodzicu nr %d i dziecku nr%d i grupie nr %d \n", getpid(),getppid(),pid, getpgid(getpid()));
-        if(kill(-pid, looking_for_process_constant) == -1) {
+        if(kill(-pid, 0) == -1) {
             perror("o nie nie znalazłem zadnego");
             exit(EXIT_FAILURE);
         }

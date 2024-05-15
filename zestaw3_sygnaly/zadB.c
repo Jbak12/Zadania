@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200112L
 #include <unistd.h>
 #include <err.h>
 #include<signal.h>
@@ -11,7 +12,7 @@ int main(int argc, char** argv) {
     int child_process_pid = fork();
     switch (child_process_pid) {
     case -1:
-        perror("aaaa eror\n");
+        perror(" eror\n");
         break;
     case 0:        
         if(execl("./zadA.x","./zadA.x" ,handling_mode_string ,signal_code_string, NULL) == -1) {

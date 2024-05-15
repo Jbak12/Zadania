@@ -1,12 +1,15 @@
+#define _GNU_SOURCE
 #include <unistd.h>
 #include<err.h>
 #include<signal.h>
 #include<stdio.h>
+#include<string.h>
 #include<stdlib.h>
 #include "params_handling.h"
 extern const char * const sys_siglist[];
 void sig_callback(int sig) {
-    printf("przyjalem sygnal  numer %d ,super :))))\n", sig);
+    char* name = strsignal(sig);
+    printf("przyjalem sygnal  numer %d, o nazwie %s super :))))\n", sig , name);
 }
 
 void handle_signals() {

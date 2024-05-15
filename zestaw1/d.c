@@ -7,6 +7,7 @@
 
 int main() {
     int i;
+    printf("pid procesu: %d, ppid procesu: %d, gpid procesu: %d\n ", getpid(), getppid(), getpgid(getpid()));
     for ( i = 0; i < FORKS; i++) {
         switch (fork()){
         case -1:
@@ -14,12 +15,13 @@ int main() {
             exit(1);
             break;
         case 0:
+            printf("pid procesu: %d, ppid procesu: %d, gpid procesu: %d\n ", getpid(), getppid(), getpgid(getpid()));
+            sleep(1);
             break;
         default:
-            sleep(1);
             break;
         }
     }
-    printf("pid procesu: %d, ppid procesu: %d, gpid procesu: %d\n ", getpid(), getppid(), getpgid(getpid()));
+    sleep(4);
     
 }
